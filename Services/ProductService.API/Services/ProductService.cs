@@ -35,7 +35,7 @@ namespace ProductService.API.Services
             return datas;
         }
 
-        public async Task<Product> GetByIdAysnc(string id)
+        public async Task<Product> GetByIdAysnc(int id)
         {
             var data = await _context.Products.FindAsync(id);
             return data;

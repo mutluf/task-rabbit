@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using ProductService.API.Model;
 using ProductService.API.Model.Dto;
 using ProductService.API.RabbitMq;
@@ -48,7 +49,7 @@ namespace ProductService.API.Controllers
         {
             try
             {
-                var data = await _productService.GetByIdAysnc(id.ToString());
+                var data = await _productService.GetByIdAysnc(id);
                 _response.Result = data;
             }
             catch (Exception ex)
@@ -82,6 +83,7 @@ namespace ProductService.API.Controllers
                     ProductCreatedEvent eventData = new() { ProductId = productNew.Id };
 
                     _publishService.Publish(eventData, nameof(ProductCreatedEvent));
+
                 }
 
 
@@ -122,16 +124,16 @@ namespace ProductService.API.Controllers
         }
 
 
-        [HttpDelete]
-        public async Task<ResponseDto> Delete([FromBody] ProductDto product)
+        [HttpDelete("{id}")]
+        public async Task<ResponseDto> Delete([FromRoute] int id)
         {
 
             try
             {
-                var data = await _productService.GetByIdAysnc(product.Id.ToString());
+                var data = await _productService.GetByIdAysnc(id);
                 _productService.Delete(data);
 
-                _response.Result = product;
+                _response.Result = data;
             }
             catch (Exception ex)
             {

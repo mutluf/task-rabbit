@@ -27,12 +27,3 @@ public class PublishService: IPublishService
           
     }
 }
-//create-product ve rabbitmq'ye data gönderip stok init etmek.
-//event fırlat- ProductCreatedEvent productId - productName
-//bunu dinleyen stok-servisi veri tabanında consume ederken stok create etsin productId yerine de gelen id'yi yazsın.
-/*
- *Product tablon var --> id, name
- * Stok tablon var --> id, stokYeri, productId
- * ProductCreate eden servisin var, Post ediyor ve Mongoya ekliyor.
- * Stok servisin var API, consume ediyor eventi.
- */
