@@ -29,7 +29,16 @@ namespace StockSaga.API.Consumers
 
             //Sipariş edilen ürünlerin stok miktarı sipariş adedinden fazla mı? değil mi?
             foreach (OrderItemMessage orderItem in context.Message.OrderItems)
-                stockResult.Add((await collection.FindAsync(s => s.ProductId == orderItem.ProductId && s.Count > orderItem.Count)).Any());
+            {
+                Stock stock =  collection.Find(s => s.ProductId == orderItem.ProductId ).FirstOrDefault();
+
+                //Stock stock1 = stock.FirstOrDefault();
+                
+                //stockResult.Add(( collection.Find(s => s.ProductId == orderItem.ProductId && s.Count > orderItem.Count)).Any());
+
+                stockResult.Add(stock.Count>orderItem.Count?true:false);
+            }
+                
 
             //Eğer fazlaysa sipariş edilen ürünlerin stok miktarı güncelleniyor.
             if (stockResult.TrueForAll(sr => sr.Equals(true)))

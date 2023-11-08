@@ -9,7 +9,12 @@ namespace OrderSaga.API.Services
     public class OrderService:IOrderService
     {
         private readonly ApplicationDbContext _context;
-        
+
+        public OrderService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public DbSet<Order> Table => _context.Set<Order>();
 
 

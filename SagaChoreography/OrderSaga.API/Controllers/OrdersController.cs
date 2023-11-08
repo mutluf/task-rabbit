@@ -38,6 +38,7 @@ namespace OrderSaga.API.Controllers
             };
 
             await _orderService.AddAysnc(order);
+            await _orderService.SaveAysnc();
 
             OrderCreatedEvent orderCreatedEvent = new()
             {

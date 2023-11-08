@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Microsoft.OpenApi.Extensions;
 using OrderSaga.API.Model;
 using OrderSaga.API.Model.Enums;
 using OrderSaga.API.Services;
@@ -23,6 +24,8 @@ namespace OrderSaga.API.Consumers
             {
                 order.OrderStatus = OrderStatus.Completed;
                 _orderService.Update(order);
+
+                await _orderService.SaveAysnc();
             }
         }
     }

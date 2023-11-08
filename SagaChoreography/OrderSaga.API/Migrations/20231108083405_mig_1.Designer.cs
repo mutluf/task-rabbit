@@ -12,8 +12,8 @@ using OrderSaga.API.Context;
 namespace OrderSaga.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231106091528_mig_init")]
-    partial class mig_init
+    [Migration("20231108083405_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

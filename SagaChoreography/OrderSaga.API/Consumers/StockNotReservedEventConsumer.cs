@@ -24,6 +24,7 @@ namespace OrderSaga.API.Consumers
             {
                 order.OrderStatus = OrderStatus.Failed;
                 _orderService.Update(order);
+                await _orderService.SaveAysnc();
 
                 Console.WriteLine(context.Message.Message);
             }

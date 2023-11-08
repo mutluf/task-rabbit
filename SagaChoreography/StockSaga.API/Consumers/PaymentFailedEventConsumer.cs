@@ -21,6 +21,8 @@ namespace StockSaga.API.Consumers
             {
                 var stock = await collection.Find(x => x.ProductId == item.ProductId).FirstOrDefaultAsync();
 
+                Stock stock1 = await (await collection.FindAsync(s => s.ProductId == item.ProductId)).FirstOrDefaultAsync();
+
                 if (stock != null)
                 {
                     stock.Count += item.Count;
